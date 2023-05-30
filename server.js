@@ -1,6 +1,5 @@
 const express = require('express');
 const proxy = require('express-http-proxy');
-const url = require('url');
 
 const app = express();
 app.use(express.static('public'));
@@ -44,9 +43,9 @@ app.use(proxy('https://www.domain.com.au', {
            delete trimmedData[id].listingModel.tags;
          }
         }
-        const imgParam = new URL("https://www.domain.com.au" + req.url).searchParams.get('images');
+        const imgParam = req.url.match('[?&]images=([^&]+)');
         if (imgParam) {
-          const numImages = parseInt(imgParam[1]);
+          const numImages = parseInt(imgParam);
           if(numImages > 0){
             for (let key in trimmedData) {
               if (trimmedData.hasOwnProperty(key)) {
