@@ -1,0 +1,18 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "Domain Plugin",
+    "name_for_model": "rent",
+    "description_for_human": "Plugin for finding apartments to rent.",
+    "description_for_model": "Plugin for finding apartments to rent.",
+    "auth": {
+        "type": "none"
+    },
+    "api": {
+        "type": "openapi",
+        "url": "https://openai-domain-search.onrender.com/openapi.yaml",
+        "is_user_authenticated": false
+    },
+    "logo_url": "https://openai-domain-search.onrender.com/logo.png",
+    "contact_email": "support@example.com",
+    "legal_info_url": "http://www.example.com/legal"
+}
