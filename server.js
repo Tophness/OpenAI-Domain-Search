@@ -44,7 +44,7 @@ app.use(proxy('https://www.domain.com.au', {
            delete trimmedData[id].listingModel.tags;
          }
         }
-        const imgParam = new URL(req.url).searchParams.get('images');
+        const imgParam = new URL("https://www.domain.com.au" + req.url).searchParams.get('images');
         if (imgParam) {
           const numImages = parseInt(imgParam[1]);
           if(numImages > 0){
