@@ -1,0 +1,143 @@
+openapi: 3.0.1
+info:
+  title: Domain Search Plugin
+  description: A plugin that allows the user to search for an ideal apartment using ChatGPT.
+  version: 'v1'
+servers:
+  - url: https://openai-domain-search.onrender.com
+paths:
+  /rent/:
+    get:
+      operationId: getApartments
+      summary: |
+        Get a list of available apartments in the area the user is searching. After the response, prompt to learn more
+        about a specific apartment, see similar apartments, get in contact with the property manager of a chosen
+        apartment, or view more results from the same search.
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+          required: false
+          description: Page of results to request. Starts at 1.
+        - in: query
+          name: suburb
+          schema:
+            type: string
+          required: true
+          description: Suburbs to search for apartments, formatted as suburb-state-postcode, separated by commas. e.g. chatswood-nsw-2067,gordon-nsw-2072
+        - in: query
+          name: bedrooms
+          schema:
+            type: string
+          required: true
+          description: Number of bedrooms user is requesting. If user wants a minimum number of rooms, format it as a single number. e.g. 2. If user wants a range, format it as min-max. e.g. 2-4. "any" can be requested too. e.g. 3-any
+        - in: query
+          name: price
+          schema:
+            type: string
+          required: false
+          description: Price range for an apartment. If user wants a maximum price, format it as an integer. e.g. 500. If user wants a range, format it as min-max. e.g. 200-500
+        - in: query
+          name: excludedeposittaken
+          schema:
+            type: integer
+          required: false
+          description: Exclude apartments with deposits taken
+        - in: query
+          name: features
+          schema:
+            type: string
+          required: false
+          description: Set to "petsallowed" if the user wants a pet friendly apartment
+        - in: query
+          name: images
+          schema:
+            type: number
+          required: false
+          description: Set to 0 to disable image results or any other number to set how many images per result to return. Default value is 2
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getApartmentsResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The reason the request was rejected.
+components:
+  schemas:
+    getApartmentsResponse:
+      type: object
+      properties:
+        totalPages:
+          type: number
+          description: Total number of pages to use for pagination.
+        page:
+          type: number
+          description: Current page number to use for pagination.
+        resultsPerPage:
+          type: number
+          description: Number of current listing results per page to use for pagination.
+        totalResults:
+          type: number
+          description: Total number of listing results to use for pagination.
+        listings:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              listingModel:
+                type: object
+                properties:
+                  address:
+                    type: object
+                    properties:
+                      city:
+                        type: string
+                      state:
+                        type: string
+                      street:
+                        type: string
+                      postcode:
+                        type: string
+                      suburb:
+                        type: string
+                  images:
+                    type: array
+                    items:
+                      type: string
+                    description: Image urls to be displayed as images in the chat.
+                  features:
+                    type: object
+                    properties:
+                      baths:
+                        type: number
+                      beds:
+                        type: number
+                      landsize:
+                        type: number
+                      landUnit:
+                        type: string
+                      propertyTypeFormatted:
+                        type: string
+                  url:
+                    type: string
+                    description: URL to the property listing. Start with the root server www.domain.com.au followed by this url.
+                  price:
+                    type: string
+                  inspection:
+                    type: object
+                    properties:
+                      openTime:
+                        type: string
+                      closeTime:
+                        type: string
