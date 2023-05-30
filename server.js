@@ -45,7 +45,7 @@ app.use(proxy('https://www.domain.com.au', {
         }
         const imgParam = req.url.match('[?&]images=([^&]+)');
         if (imgParam) {
-          const numImages = parseInt(imgParam);
+          const numImages = parseInt(imgParam[1]);
           if(numImages > 0){
             for (let key in trimmedData) {
               if (trimmedData.hasOwnProperty(key)) {
