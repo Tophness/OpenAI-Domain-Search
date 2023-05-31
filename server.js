@@ -2,8 +2,13 @@
 
 const express = require("express");
 const proxy = require("express-http-proxy");
+const cors = require("cors");
 
 const app = express();
+
+// Enable CORS
+app.use(cors());
+
 app.use(express.static("public"));
 
 app.use(
@@ -14,10 +19,7 @@ app.use(
           "application/json; charset=utf-8";
         proxyReqOpts.headers["accept"] = "application/json";
       }
-      proxyReqOpts.headers["Access-Control-Allow-Origin"] = "*";
-      proxyReqOpts.headers["Access-Control-Allow-Methods"] = "*";
-      proxyReqOpts.headers["Access-Control-Allow-Headers"] = "*";
-      proxyReqOpts.headers["Access-Control-Allow-Credentials"] = "true";
+
       return proxyReqOpts;
     },
     userResDecorator: function (proxyRes, proxyResData, req, res) {
