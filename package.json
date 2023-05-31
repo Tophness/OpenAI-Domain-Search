@@ -1,0 +1,36 @@
+{
+  "name": "openai-chatgpt-plugin-domain-search",
+  "version": "0.0.1",
+  "description": "Unofficial domain.com.au ChatGPT plugin to search rental properties. Includes proxy server to bypass CORS",
+  "author": "Chris Malone (https://github.com/Tophness)",
+  "contributors": [
+    {
+      "name": "Glenn 'devalias' Grant",
+      "url": "https://devalias.net/"
+    }
+  ],
+  "license": "GPL-3.0-only",
+  "homepage": "https://github.com/Tophness/OpenAI-Domain-Search#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tophness/OpenAI-Domain-Search.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Tophness/OpenAI-Domain-Search/issues"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "prettier --write '*.js'"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.1",
+    "express": "^4.18.2",
+    "express-http-proxy": "^1.6.3"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.8"
+  }
+}
