@@ -6,7 +6,7 @@ const proxy = require("express-http-proxy");
 const cors = require("cors");
 
 // Load environment variables
-const config = dotenv.config();
+const config = dotenv.config().parsed;
 config.DEBUG = ["1", "true"].includes(config.DEBUG) || false;
 
 const app = express();
