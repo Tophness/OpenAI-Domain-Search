@@ -9,8 +9,7 @@
     },
     "api": {
         "type": "openapi",
-        "url": "https://openai-domain-search.onrender.com/openapi.yaml",
-        "is_user_authenticated": false
+        "url": "https://openai-domain-search.onrender.com/openapi.yaml"
     },
     "logo_url": "https://openai-domain-search.onrender.com/logo.png",
     "contact_email": "support@example.com",
