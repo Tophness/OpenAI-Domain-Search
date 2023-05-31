@@ -14,6 +14,14 @@ const app = express();
 // Enable CORS
 app.use(cors());
 
+// Middleware to log requests
+app.use((req, res, next) => {
+  if (config.DEBUG) {
+    console.log(`Request received: ${req.method} ${req.url}`);
+  }
+  next();
+});
+
 app.use(express.static("public"));
 
 app.use(
