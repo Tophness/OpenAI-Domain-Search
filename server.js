@@ -105,4 +105,7 @@ app.use(
   })
 );
 
-const server = app.listen(config.BIND_PORT, config.BIND_HOST);
+const server = app.listen(config.BIND_PORT, config.BIND_HOST, () => {
+  const { address, port } = server.address();
+  console.log(`Server running on http://${address}:${port}`);
+});
