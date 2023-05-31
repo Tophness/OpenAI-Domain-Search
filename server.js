@@ -1,8 +1,13 @@
 #!/usr/bin/env node
 
+const dotenv = require("dotenv");
 const express = require("express");
 const proxy = require("express-http-proxy");
 const cors = require("cors");
+
+// Load environment variables
+const config = dotenv.config();
+config.DEBUG = ["1", "true"].includes(config.DEBUG) || false;
 
 const app = express();
 
@@ -12,7 +17,7 @@ app.use(cors());
 app.use(express.static("public"));
 
 app.use(
-  proxy("https://www.domain.com.au", {
+  proxy(config.PROXY_HOST, {
     proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
       if (srcReq.url.indexOf("/rent") !== -1) {
         proxyReqOpts.headers["content-type"] =
@@ -100,4 +105,4 @@ app.use(
   })
 );
 
-const server = app.listen(443);
+const server = app.listen(config.BIND_PORT, config.BIND_HOST);
