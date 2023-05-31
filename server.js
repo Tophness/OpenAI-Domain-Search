@@ -6,7 +6,10 @@ const proxy = require("express-http-proxy");
 const cors = require("cors");
 
 // Load environment variables
-const config = dotenv.config().parsed;
+const config = process.env;
+if (!config.BIND_HOST) throw new Error("required env var BIND_HOST not set");
+if (!config.BIND_PORT) throw new Error("required env var BIND_PORT not set");
+if (!config.PROXY_HOST) throw new Error("required env var PROXY_HOST not set");
 config.DEBUG = ["1", "true"].includes(config.DEBUG) || false;
 
 const app = express();
