@@ -33,6 +33,9 @@ app.use(
         proxyReqOpts.headers["accept"] = "application/json";
       }
 
+      delete proxyReqOpts.headers["openai-conversation-id"];
+      delete proxyReqOpts.headers["openai-ephemeral-user-id"];
+
       return proxyReqOpts;
     },
     userResDecorator: function (proxyRes, proxyResData, req, res) {
