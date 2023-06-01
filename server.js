@@ -29,10 +29,11 @@ app.use(
     proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
       if (srcReq.url == '/rent'){
         srcReq.url = '/rent?';
+        proxyReqOpts.headers["content-type"] = "application/json; charset=utf-8";
+        proxyReqOpts.headers["accept"] = "application/json";
       }
       if (srcReq.url.indexOf("/rent") !== -1) {
-        proxyReqOpts.headers["content-type"] =
-          "application/json; charset=utf-8";
+        proxyReqOpts.headers["content-type"] = "application/json; charset=utf-8";
         proxyReqOpts.headers["accept"] = "application/json";
       }
 
