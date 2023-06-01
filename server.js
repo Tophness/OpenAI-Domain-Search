@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 app.use(express.static("public"));
 
 app.use(
-  proxy("http://www.domain.com.au", {
+  proxy("https://www.domain.com.au", {
     proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
       if (srcReq.url.indexOf("/rent") !== -1) {
         proxyReqOpts.headers["content-type"] =
