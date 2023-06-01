@@ -7,9 +7,6 @@ const cors = require("cors");
 
 // Load environment variables
 const config = process.env;
-if (!config.BIND_HOST) throw new Error("required env var BIND_HOST not set");
-if (!config.BIND_PORT) throw new Error("required env var BIND_PORT not set");
-if (!config.PROXY_HOST) throw new Error("required env var PROXY_HOST not set");
 config.DEBUG = ["1", "true"].includes(config.DEBUG) || false;
 
 const app = express();
@@ -19,7 +16,7 @@ app.use(cors());
 
 // Middleware to log requests
 app.use((req, res, next) => {
-  if (config.DEBUG) {
+  if (config.DEBUG || config.DEBUG == "0") {
     console.log(`Request received: ${req.method} ${req.url}`);
   }
   next();
@@ -119,7 +116,12 @@ app.use(
   })
 );
 
-const server = app.listen(config.BIND_PORT, config.BIND_HOST, () => {
-  const { address, port } = server.address();
-  console.log(`Server running on http://${address}:${port}`);
-});
+if(config.BIND_PORT || config.BIND_HOST)
+  const server = app.listen(config.BIND_PORT, config.BIND_HOST, () => {
+    const { address, port } = server.address();
+    console.log(`Server running on http://${address}:${port}`);
+  });
+}
+else{
+  const server = app.listen(443);
+}
