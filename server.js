@@ -27,6 +27,9 @@ app.use(express.static("public"));
 app.use(
   proxy("https://www.domain.com.au", {
     proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
+      if (srcReq.url == '/rent'){
+        srcReq.url = '/rent?';
+      }
       if (srcReq.url.indexOf("/rent") !== -1) {
         proxyReqOpts.headers["content-type"] =
           "application/json; charset=utf-8";
