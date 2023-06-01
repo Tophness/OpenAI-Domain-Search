@@ -49,7 +49,7 @@ paths:
           schema:
             type: string
           required: false
-          description: Set to "petsallowed" if the user wants a pet friendly apartment
+          description: Features to search for, separated by commas. Options are petsallowed, gas, builtinwardrobes, gardencourtyard, internallaundry, furnished, balconydeck, study, swimmingpool, airconditioning, secureparking, ensuite, heating and dishwasher
         - in: query
           name: images
           schema:
