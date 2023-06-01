@@ -24,13 +24,13 @@ paths:
           name: suburb
           schema:
             type: string
-          required: true
+          required: false
           description: Suburbs to search for apartments, formatted as suburb-state-postcode, separated by commas. e.g. chatswood-nsw-2067,gordon-nsw-2072
         - in: query
           name: bedrooms
           schema:
             type: string
-          required: true
+          required: false
           description: Number of bedrooms user is requesting. If user wants a minimum number of rooms, format it as a single number. e.g. 2. If user wants a range, format it as min-max. e.g. 2-4. "any" can be used in range values, but not by itself. e.g. 1-any
         - in: query
           name: price
