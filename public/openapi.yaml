@@ -31,7 +31,7 @@ paths:
           schema:
             type: string
           required: true
-          description: Number of bedrooms user is requesting. If user wants a minimum number of rooms, format it as a single number. e.g. 2. If user wants a range, format it as min-max. e.g. 2-4. "any" can be requested too. e.g. 3-any
+          description: Number of bedrooms user is requesting. If user wants a minimum number of rooms, format it as a single number. e.g. 2. If user wants a range, format it as min-max. e.g. 2-4. "any" can be used in range values, but not by itself. e.g. 1-any
         - in: query
           name: price
           schema:
